@@ -44,7 +44,7 @@ Oauth2 Library has been taken from https://github.com/bshaffer/oauth2-server-php
 
 
 
-**This plugin has been tested on Moodle 2.8 and Moodle 3.0**
+**This plugin has been tested on Moodle 2.8 and Moodle 3.0 and Moodle 3.5**
 
 
 ## Contributors
