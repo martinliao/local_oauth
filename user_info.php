@@ -4,7 +4,7 @@ require_once '../../config.php';
 require_once __DIR__.'/lib.php';
 
 \core\session\manager::write_close();
-debugBreak();
+//debugBreak();
 $server = oauth_get_server();
 if (!$server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
     $logparams = array('other' => array('cause' => 'invalid_approval'));

@@ -19,18 +19,26 @@ if (!$server->verifyResourceRequest(OAuth2\Request::createFromGlobals())) {
 
 $token = $server->getAccessTokenData(OAuth2\Request::createFromGlobals());
 if (isset($token['user_id']) && !empty($token['user_id'])) {
-
+//debugBreak();
     //$user = $DB->get_record('user', array('id'=>$token['user_id']), 'id,auth,username,idnumber,firstname,lastname,email,lang,country,phone1,address,description');
     $userid = $token['user_id'];
-    $courses = enrol_get_users_courses($userid, true, 'id, shortname, fullname, idnumber, visible,
-                   summary, summaryformat, format, showgrades, lang, enablecompletion, category, startdate, enddate');
+    //$courses = enrol_get_users_courses($userid, true, 'id, shortname, fullname, idnumber, visible,
+    //               summary, summaryformat, format, showgrades, lang, enablecompletion, category, startdate, enddate');
+    // cap: moodle/course:managefiles or moodle/course:manageactivities
+    $courses = get_user_capability_course('moodle/course:manageactivities', $userid, true,
+                'id, shortname, fullname, idnumber, summary, summaryformat, format, category, startdate, enddate');
+    
     if (!$courses) {
+        $courses = array();
+    }
+    
+    /*if (!$courses) {
         $logparams = array('other' => array('cause' => 'user_not_found'));
         $event = \local_oauth\event\user_info_request_failed::create($logparams);
         $event->trigger();
 
         $response->send();
-    }
+    }/**/
 
     $request = OAuth2\Request::createFromGlobals();
     $response = new OAuth2\Response();

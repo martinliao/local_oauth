@@ -219,7 +219,7 @@ class AuthorizeController implements AuthorizeControllerInterface
                 return false;
             }
         }
-
+debugBreak();
         // validate requested scope if it exists
         $requestedScope = $this->scopeUtil->getScopeFromRequest($request);
 
